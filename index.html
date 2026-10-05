@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>御茶ノ水本校 校舎利用方法</title>
+  <meta name="description" content="御茶ノ水本校の自習席・指定席・休憩スペースの利用ルールと各種申請フォームのご案内">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#1a1a1a',
+            sub: '#6b6b6b',
+            line: '#e3e3e3',
+            paper: '#f6f5f3',
+            aka: '#a8232a',
+            akaLight: '#fbf1f1',
+          },
+          fontFamily: {
+            num: ['Oswald', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      font-feature-settings: "palt";
+      letter-spacing: 0.02em;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; }
+
+    /* 読み込み時 */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .rise { animation: rise .5s ease-out both; animation-delay: var(--d, 0ms); }
+
+    /* タブ切り替え時 */
+    @keyframes slideFromRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+    @keyframes slideFromLeft  { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+    .panel.in-right { animation: slideFromRight .32s ease-out both; }
+    .panel.in-left  { animation: slideFromLeft  .32s ease-out both; }
+
+    /* タブの下線 */
+    #tab-indicator { transition: transform .3s cubic-bezier(.3,.8,.3,1), width .3s cubic-bezier(.3,.8,.3,1); }
+
+    /* ボトムシート */
+    #sheet { transition: transform .35s cubic-bezier(.3,.8,.3,1); }
+    #sheet-backdrop { transition: opacity .3s ease; }
+
+    /* 見出しの頭につける赤い縦棒 */
+    .bar-head { position: relative; padding-left: 12px; }
+    .bar-head::before {
+      content: ""; position: absolute; left: 0; top: .25em; bottom: .25em;
+      width: 4px; background: #a8232a;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rise, .panel.in-right, .panel.in-left { animation: none; }
+      #tab-indicator, #sheet, #sheet-backdrop { transition: none; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink leading-[1.9]">
+
+  <!-- ヘッダー -->
+  <header class="bg-white">
+    <div class="max-w-xl mx-auto px-5 pt-7 pb-5 flex items-end justify-between">
+      <div class="rise">
+        <p class="text-[13px] font-bold text-aka">御茶ノ水本校</p>
+        <h1 class="text-[26px] font-black leading-tight mt-1">校舎利用方法</h1>
+      </div>
+      <p class="rise font-num text-[13px] text-sub tracking-wider pb-1" style="--d:60ms">2026.04</p>
+    </div>
+  </header>
+
+  <!-- タブ -->
+  <nav class="sticky top-0 z-30 bg-white border-b border-line" aria-label="項目">
+    <div class="max-w-xl mx-auto relative">
+      <div id="tabs" class="no-scrollbar relative flex overflow-x-auto" role="tablist">
+        <button type="button" role="tab" data-tab="jishu"   class="tab shrink-0 px-4 py-3.5 text-[14px] font-bold text-sub whitespace-nowrap">自習席</button>
+        <button type="button" role="tab" data-tab="shitei"  class="tab shrink-0 px-4 py-3.5 text-[14px] font-bold text-sub whitespace-nowrap">指定席</button>
+        <button type="button" role="tab" data-tab="kyukei"  class="tab shrink-0 px-4 py-3.5 text-[14px] font-bold text-sub whitespace-nowrap">休憩スペース</button>
+        <button type="button" role="tab" data-tab="sonota"  class="tab shrink-0 px-4 py-3.5 text-[14px] font-bold text-sub whitespace-nowrap">その他のルール</button>
+        <button type="button" role="tab" data-tab="tensaku" class="tab shrink-0 px-4 py-3.5 text-[14px] font-bold text-sub whitespace-nowrap">質問・添削</button>
+        <div id="tab-indicator" class="absolute bottom-0 left-0 h-[2px] bg-ink" style="width:0"></div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="panels" class="max-w-xl mx-auto pb-32 rise" style="--d:120ms">
+
+    <!-- 自習席 -->
+    <section id="p-jishu" class="panel" role="tabpanel" aria-label="自習席の使い方">
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">自習席の使い方</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line text-[15px]">
+          <li class="py-4">エアコンや窓など<b>設備の調整は禁止</b>です。必要な場合は受付・教務へご相談ください。</li>
+          <li class="py-4">ブランケット・クッションは自由に借りられます。使ったあとは畳んで元の場所へ。</li>
+          <li class="py-4">ゴミは必ずゴミ箱まで捨ててください。分別にもご協力ください。</li>
+        </ul>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <div class="border border-aka">
+          <p class="inline-block bg-aka text-white text-[12px] font-bold px-2.5 py-0.5">利用停止</p>
+          <p class="px-4 pt-3 pb-4 text-[15px]">
+            自習室での<b class="text-aka">食事・お喋り・長時間の居眠り</b>などで、<b class="text-aka">月に3回以上注意を受けた人</b>は、自習室の利用を一時的に停止します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 指定席 -->
+    <section id="p-shitei" class="panel hidden" role="tabpanel" aria-label="指定席の使い方と申請ルール">
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">指定席の使い方</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line text-[15px]">
+          <li class="py-4">参考書・私物は置いて帰ってOK。<span class="block text-[13px] text-sub mt-0.5">※校舎の判断で制限することがあります</span></li>
+          <li class="py-4">継続利用の条件を達成していれば、<b>継続のための申請は不要</b>です。</li>
+        </ul>
+
+        <div class="mt-6 border border-aka">
+          <p class="inline-block bg-aka text-white text-[12px] font-bold px-2.5 py-0.5">注意</p>
+          <ul class="px-4 pt-3 pb-4 text-[15px] space-y-3">
+            <li>窓際や床など、<b class="text-aka">自分の指定席以外に荷物を置かないこと。</b>注意や撤去の対象になります。</li>
+            <li>条件が未達成で継続できない場合は、<b class="text-aka">必ず翌月4日までに荷物を持ち帰って</b>ください。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">申請と条件</h2>
+        <dl class="mt-4 border-t border-line text-[15px]">
+          <div class="flex border-b border-line">
+            <dt class="w-[5.5em] shrink-0 py-4 text-[13px] text-sub">申請期限</dt>
+            <dd class="py-4"><b class="text-[17px]">毎月25日まで</b><span class="block text-[13px] text-sub">翌月5日から利用できます</span></dd>
+          </div>
+          <div class="flex border-b border-line">
+            <dt class="w-[5.5em] shrink-0 py-4 text-[13px] text-sub">利用期間</dt>
+            <dd class="py-4"><b class="text-[17px]">翌月5日〜翌々月4日</b></dd>
+          </div>
+          <div class="flex border-b border-line">
+            <dt class="w-[5.5em] shrink-0 py-4 text-[13px] text-sub">記録</dt>
+            <dd class="py-4"><b>武田ログ</b>と<b>紙への記録（楷書でフルネーム）</b>の<b class="bg-[linear-gradient(transparent_60%,#f3d4d5_60%)]">両方</b>を忘れずに。</dd>
+          </div>
+        </dl>
+
+        <ul class="mt-5 space-y-3 text-[13px] leading-[1.8] text-sub">
+          <li class="pl-[1em] -indent-[1em]">※外部模試・英検の際は、<b class="text-ink">受検の3日前までに受付LINE</b>へ連絡してください。受検時間を自習室の利用時間として考慮します。</li>
+          <li class="pl-[1em] -indent-[1em]">※感染症にかかった場合も考慮します。わかった時点で連絡してください。</li>
+          <li class="pl-[1em] -indent-[1em]">※<b class="text-aka">9:00より前・21:45以降</b>の時間は利用時間にカウントされません（後日調整）。余裕をもって達成しましょう。</li>
+        </ul>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">毎月の必須利用時間</h2>
+        <p class="mt-1 text-[13px] text-sub">継続利用にもこの時間の達成が必要です。</p>
+
+        <div class="mt-5 flex items-baseline justify-between border-b-2 border-ink pb-2">
+          <span class="text-[14px] font-bold">既卒生</span>
+          <span><span class="text-[13px] text-sub mr-1">毎月</span><span class="font-num text-[40px] leading-none">280</span><span class="text-[13px] ml-1">時間</span></span>
+        </div>
+
+        <p class="mt-7 text-[14px] font-bold">現役生</p>
+        <div id="hours-grid" class="mt-2 grid grid-cols-4 gap-px bg-line border border-line"></div>
+        <p class="mt-2 text-[12px] text-sub">赤字は150時間以上の月</p>
+
+        <a href="https://forms.gle/DyvfowGD3dJtTVpw8" target="_blank" rel="noopener noreferrer"
+           class="mt-8 flex w-full items-center justify-between bg-aka px-5 py-[18px] text-white font-bold active:opacity-80 active:scale-[0.98] transition">
+          <span>指定席を申請する</span><span class="text-[13px] font-medium opacity-80">フォームへ →</span>
+        </a>
+        <p class="mt-2 text-[12px] text-sub text-right">申請は毎月25日まで</p>
+      </div>
+    </section>
+
+    <!-- 休憩スペース -->
+    <section id="p-kyukei" class="panel hidden" role="tabpanel" aria-label="休憩スペースの使い方">
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">休憩スペースの使い方</h2>
+
+        <div class="mt-5 grid grid-cols-2 border border-line">
+          <div class="p-4 border-r border-line">
+            <p class="text-[12px] font-bold text-sub">していいこと</p>
+            <p class="mt-2 text-[15px] leading-[1.8]">食事<br>休憩<br>勉強<br>仮眠<span class="text-[12px] text-sub">（20分以内）</span></p>
+          </div>
+          <div class="p-4 bg-akaLight">
+            <p class="text-[12px] font-bold text-aka">禁止</p>
+            <p class="mt-2 text-[15px] leading-[1.8]">会話<br>長時間の睡眠<br>横になること</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">音読スペース</h2>
+        <p class="mt-3 text-[15px]">特訓スペースは、<b>月〜土の12:30まで</b>に限り「音読スペース」として開放しています。</p>
+      </div>
+    </section>
+
+    <!-- その他 -->
+    <section id="p-sonota" class="panel hidden" role="tabpanel" aria-label="その他の校舎利用ルール">
+      <div class="bg-white mt-2 px-5 py-6">
+        <div class="border border-aka">
+          <p class="inline-block bg-aka text-white text-[12px] font-bold px-2.5 py-0.5">禁止</p>
+          <ul class="px-4 pt-3 pb-4 text-[15px] space-y-2">
+            <li><b>1〜2階以外</b>は立ち入り禁止</li>
+            <li>本棚の参考書・赤本の<b>持ち出し・コピー</b></li>
+            <li>トイレットペーパーなど<b>校舎の物品の持ち出し</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">印刷・コピー</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line text-[15px]">
+          <li class="py-4">過去問などのPDFを印刷してほしいときは、<b>本校LINEに送って</b>依頼してください。</li>
+          <li class="py-4">コピー機は常識の範囲で。不要なカラー印刷は控えてください。</li>
+        </ul>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">自由に使えるもの</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line text-[15px]">
+          <li class="py-4">面談室横のコンテンツラック内の資料<span class="block text-[13px] text-sub mt-0.5">使い方は講師に確認してください</span></li>
+          <li class="py-4">ティッシュ・絆創膏など<span class="block text-[13px] text-sub mt-0.5">受付で声をかけてください</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <p class="text-[15px]">意見・要望は、教務・受付・LINEのどれかへ。<br>わからないことがあれば、いつでも気軽に受付まで！</p>
+      </div>
+    </section>
+
+    <!-- 質問・添削 -->
+    <section id="p-tensaku" class="panel hidden" role="tabpanel" aria-label="質問対応・添削">
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">質問対応</h2>
+        <p class="mt-4 flex items-baseline gap-2">
+          <span class="text-[14px]">原則1回</span><span class="font-num text-[40px] leading-none text-aka">15</span><span class="text-[14px]">分まで</span>
+        </p>
+        <p class="mt-3 text-[15px]">事前に質問内容を整理して、長くならないようにしましょう。</p>
+      </div>
+
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">英作文添削・スピーキング練習</h2>
+        <p class="mt-3 text-[15px]">下のフォームから申し込めます。</p>
+
+        <div class="mt-5 space-y-2">
+          <a href="https://forms.gle/XE2CBW9iVVE3ahnh9" target="_blank" rel="noopener noreferrer"
+             class="flex w-full items-center justify-between bg-ink px-5 py-[18px] text-white font-bold active:opacity-80 active:scale-[0.98] transition">
+            <span>英作文添削を申し込む</span><span class="text-[13px] font-medium opacity-70">フォームへ →</span>
+          </a>
+          <a href="https://forms.gle/yxGqm552s6iyFybW7" target="_blank" rel="noopener noreferrer"
+             class="flex w-full items-center justify-between bg-ink px-5 py-[18px] text-white font-bold active:opacity-80 active:scale-[0.98] transition">
+            <span>スピーキング練習を申し込む</span><span class="text-[13px] font-medium opacity-70">フォームへ →</span>
+          </a>
+        </div>
+        <p class="mt-3 text-[13px] text-sub">※スピーキング練習は<b class="text-ink">3か月に2回まで</b></p>
+      </div>
+    </section>
+
+    <p class="mt-6 text-center text-[12px] text-sub">左右にスワイプで項目を切り替えられます</p>
+  </main>
+
+  <!-- 下部固定バー -->
+  <div class="fixed bottom-0 inset-x-0 z-40 bg-white border-t border-line" style="padding-bottom: env(safe-area-inset-bottom)">
+    <div class="max-w-xl mx-auto px-4 py-3">
+      <button type="button" id="open-sheet"
+              class="w-full bg-ink text-white font-bold py-3.5 text-[15px] active:opacity-80 active:scale-[0.98] transition">
+        申請フォーム一覧
+      </button>
+    </div>
+  </div>
+
+  <!-- ボトムシート -->
+  <div id="sheet-backdrop" class="fixed inset-0 z-50 bg-black/40 opacity-0 pointer-events-none"></div>
+  <div id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"
+       class="fixed bottom-0 inset-x-0 z-50 bg-white translate-y-full" style="padding-bottom: env(safe-area-inset-bottom)">
+    <div class="max-w-xl mx-auto">
+      <div class="flex justify-center pt-2.5"><span class="block h-1 w-10 bg-line"></span></div>
+      <div class="flex items-center justify-between px-5 pt-3 pb-2">
+        <p id="sheet-title" class="text-[16px] font-bold">申請フォーム</p>
+        <button type="button" id="close-sheet" class="text-[14px] text-sub px-2 py-1 -mr-2">閉じる</button>
+      </div>
+      <ul class="border-t border-line">
+        <li class="border-b border-line">
+          <a href="https://forms.gle/DyvfowGD3dJtTVpw8" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-5 py-4 active:bg-paper">
+            <span><span class="block font-bold text-[15px]">指定席申請</span><span class="block text-[12px] text-sub leading-snug">毎月25日まで</span></span>
+            <span class="text-sub">→</span>
+          </a>
+        </li>
+        <li class="border-b border-line">
+          <a href="https://forms.gle/XE2CBW9iVVE3ahnh9" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-5 py-4 active:bg-paper">
+            <span class="font-bold text-[15px]">英作文添削</span>
+            <span class="text-sub">→</span>
+          </a>
+        </li>
+        <li class="border-b border-line">
+          <a href="https://forms.gle/yxGqm552s6iyFybW7" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-5 py-4 active:bg-paper">
+            <span><span class="block font-bold text-[15px]">スピーキング練習</span><span class="block text-[12px] text-sub leading-snug">3か月に2回まで</span></span>
+            <span class="text-sub">→</span>
+          </a>
+        </li>
+      </ul>
+      <div class="h-4"></div>
+    </div>
+  </div>
+
+  <script>
+    // 現役生の必須利用時間
+    (function () {
+      const hours = [120, 120, 150, 150, 120, 120, 150, 200, 120, 120, 120, 150];
+      document.getElementById('hours-grid').innerHTML = hours.map((h, i) => `
+        <div class="bg-white py-3 text-center">
+          <div class="text-[11px] text-sub leading-none">${i + 1}月</div>
+          <div class="mt-1.5 font-num text-[22px] leading-none ${h >= 150 ? 'text-aka' : ''}">${h}</div>
+        </div>`).join('');
+    })();
+
+    // タブ
+    const tabs = [...document.querySelectorAll('.tab')];
+    const indicator = document.getElementById('tab-indicator');
+    const nav = document.querySelector('nav');
+    let current = 0;
+
+    function moveIndicator(tab) {
+      indicator.style.width = tab.offsetWidth + 'px';
+      indicator.style.transform = `translateX(${tab.offsetLeft}px)`;
+    }
+
+    function show(index, { scroll = true } = {}) {
+      if (index < 0 || index >= tabs.length) return;
+      const prev = current;
+      current = index;
+
+      tabs.forEach((t, i) => {
+        const active = i === index;
+        t.setAttribute('aria-selected', active);
+        t.classList.toggle('text-ink', active);
+        t.classList.toggle('text-sub', !active);
+        document.getElementById('p-' + t.dataset.tab).classList.toggle('hidden', !active);
+      });
+
+      const panel = document.getElementById('p-' + tabs[index].dataset.tab);
+      panel.classList.remove('in-right', 'in-left');
+      if (prev !== index) {
+        void panel.offsetWidth;
+        panel.classList.add(index > prev ? 'in-right' : 'in-left');
+      }
+
+      moveIndicator(tabs[index]);
+      tabs[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      history.replaceState(null, '', '#' + tabs[index].dataset.tab);
+
+      // タブより下までスクロールしていたら、タブの位置まで戻す
+      if (scroll && window.scrollY > nav.offsetTop) {
+        window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
+      }
+    }
+
+    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+    window.addEventListener('resize', () => moveIndicator(tabs[current]));
+
+    // URLの # で開くタブを指定できる（例: index.html#shitei）
+    const initial = tabs.findIndex(t => '#' + t.dataset.tab === location.hash);
+    show(initial >= 0 ? initial : 0, { scroll: false });
+    document.fonts && document.fonts.ready.then(() => moveIndicator(tabs[current]));
+
+    // 左右スワイプで切り替え
+    let sx = 0, sy = 0;
+    const panels = document.getElementById('panels');
+    panels.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    panels.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+    // ボトムシート
+    const sheet = document.getElementById('sheet');
+    const backdrop = document.getElementById('sheet-backdrop');
+    function openSheet() {
+      sheet.classList.remove('translate-y-full');
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSheet() {
+      sheet.classList.add('translate-y-full');
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('open-sheet').addEventListener('click', openSheet);
+    document.getElementById('close-sheet').addEventListener('click', closeSheet);
+    backdrop.addEventListener('click', closeSheet);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+    // シートを下にスワイプで閉じる
+    let sheetStartY = 0;
+    sheet.addEventListener('touchstart', e => { sheetStartY = e.touches[0].clientY; }, { passive: true });
+    sheet.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - sheetStartY > 60) closeSheet(); }, { passive: true });
+  </script>
+</body>
+</html>
