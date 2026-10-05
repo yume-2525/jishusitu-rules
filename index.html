@@ -106,7 +106,7 @@
     </div>
   </nav>
 
-  <main id="panels" class="max-w-xl mx-auto pb-32 rise" style="--d:120ms">
+  <main id="panels" class="max-w-xl mx-auto pb-32 rise overflow-x-clip" style="--d:120ms">
 
     <!-- 自習室 -->
     <section id="p-jishu" class="panel" role="tabpanel" aria-label="自習室">
@@ -378,7 +378,11 @@
       }
 
       moveIndicator(tabs[index]);
-      tabs[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      // タブバーだけを横スクロールして、選んだタブを中央に寄せる
+      // （scrollIntoView だとページ全体まで横にスクロールしてしまうため使わない）
+      const bar = document.getElementById('tabs');
+      const t = tabs[index];
+      bar.scrollTo({ left: t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
       history.replaceState(null, '', '#' + tabs[index].dataset.tab);
 
       // タブより下までスクロールしていたら、タブの位置まで戻す
