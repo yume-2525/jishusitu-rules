@@ -208,20 +208,33 @@
     </section>
 
     <!-- 休憩スペース -->
-    <section id="p-kyukei" class="panel hidden" role="tabpanel" aria-label="休憩スペースの使い方">
+    <section id="p-kyukei" class="panel hidden" role="tabpanel" aria-label="休憩スペース">
       <div class="bg-white mt-2 px-5 py-6">
         <h2 class="bar-head text-[18px] font-bold leading-snug">休憩スペースの使い方</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line">
+          <li class="py-4 text-[15px] leading-[1.7]">食事</li>
+          <li class="py-4 text-[15px] leading-[1.7]">休憩</li>
+          <li class="py-4 text-[15px] leading-[1.7]">勉強</li>
+          <li class="py-4 text-[15px] leading-[1.7]">仮眠<span class="ml-1 text-[12px] text-sub">（20分以内）</span></li>
+        </ul>
+      </div>
 
-        <div class="mt-5 grid grid-cols-2 border border-line">
-          <div class="p-4 border-r border-line">
-            <p class="text-[12px] font-bold text-sub">していいこと</p>
-            <p class="mt-2 text-[15px] leading-[1.8]">食事<br>休憩<br>勉強<br>仮眠<span class="text-[12px] text-sub">（20分以内）</span></p>
-          </div>
-          <div class="p-4 bg-akaLight">
-            <p class="text-[12px] font-bold text-aka">禁止</p>
-            <p class="mt-2 text-[15px] leading-[1.8]">会話<br>長時間の睡眠<br>横になること</p>
-          </div>
-        </div>
+      <div class="bg-white mt-2 px-5 py-6">
+        <h2 class="bar-head text-[18px] font-bold leading-snug">禁止事項</h2>
+        <ul class="mt-4 divide-y divide-line border-y border-line">
+          <li class="flex gap-3 py-4">
+            <span class="mt-[3px] flex h-6 w-6 shrink-0 items-center justify-center bg-aka text-[13px] font-bold text-white">×</span>
+            <span class="text-[15px] font-bold leading-[1.7]">会話</span>
+          </li>
+          <li class="flex gap-3 py-4">
+            <span class="mt-[3px] flex h-6 w-6 shrink-0 items-center justify-center bg-aka text-[13px] font-bold text-white">×</span>
+            <span class="text-[15px] font-bold leading-[1.7]">長時間の睡眠</span>
+          </li>
+          <li class="flex gap-3 py-4">
+            <span class="mt-[3px] flex h-6 w-6 shrink-0 items-center justify-center bg-aka text-[13px] font-bold text-white">×</span>
+            <span class="text-[15px] font-bold leading-[1.7]">横になること</span>
+          </li>
+        </ul>
       </div>
     </section>
 
